@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Classes.Models;
 using InstaSharper.Classes.ResponseWrappers;
@@ -13,6 +7,12 @@ using InstaSharper.Converters.Json;
 using InstaSharper.Helpers;
 using InstaSharper.Logger;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {
@@ -152,7 +152,7 @@ namespace InstaSharper.API.Processors
                     UriCreator.GetUserFollowersUri(user.Value.Pk, _user.RankToken, paginationParameters.NextId);
                 var followersResponse = await GetUserListByURIAsync(userFollowersUri);
                 if (!followersResponse.Succeeded)
-                    Result.Fail(followersResponse.Info, (InstaUserList) null);
+                    Result.Fail(followersResponse.Info, (InstaUserList)null);
                 followers.AddRange(
                     followersResponse.Value.Items.Select(ConvertersFabric.Instance.GetUserShortConverter)
                         .Select(converter => converter.Convert()));
@@ -238,12 +238,12 @@ namespace InstaSharper.API.Processors
                 if (maxPages == 0) maxPages = int.MaxValue;
                 var user = await GetUserAsync(username);
                 if (!user.Succeeded || string.IsNullOrEmpty(user.Value.Pk))
-                    return Result.Fail($"Unable to get user {username}", (InstaMediaList) null);
+                    return Result.Fail($"Unable to get user {username}", (InstaMediaList)null);
                 var uri = UriCreator.GetUserTagsUri(user.Value?.Pk, _user.RankToken);
                 var request = HttpHelper.GetDefaultRequest(HttpMethod.Get, uri, _deviceInfo);
                 var response = await _httpRequestProcessor.SendAsync(request);
                 var json = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != HttpStatusCode.OK) return Result.Fail("", (InstaMediaList) null);
+                if (response.StatusCode != HttpStatusCode.OK) return Result.Fail("", (InstaMediaList)null);
                 var mediaResponse = JsonConvert.DeserializeObject<InstaMediaListResponse>(json,
                     new InstaMediaListDataConverter());
                 var nextId = mediaResponse.NextMaxId;
@@ -339,7 +339,7 @@ namespace InstaSharper.API.Processors
             catch (Exception exception)
             {
                 _logger?.LogException(exception);
-                return Result.Fail(exception.Message, (InstaFriendshipStatus) null);
+                return Result.Fail(exception.Message, (InstaFriendshipStatus)null);
             }
         }
 
@@ -369,7 +369,7 @@ namespace InstaSharper.API.Processors
             catch (Exception exception)
             {
                 _logger?.LogException(exception);
-                return Result.Fail(exception.Message, (InstaFriendshipStatus) null);
+                return Result.Fail(exception.Message, (InstaFriendshipStatus)null);
             }
         }
 
@@ -384,7 +384,7 @@ namespace InstaSharper.API.Processors
                     new InstaMediaListDataConverter());
                 return Result.Success(mediaResponse);
             }
-            return Result.Fail("", (InstaMediaListResponse) null);
+            return Result.Fail("", (InstaMediaListResponse)null);
         }
 
         private async Task<IResult<InstaUserListShortResponse>> GetUserListByURIAsync(Uri uri)
@@ -398,7 +398,7 @@ namespace InstaSharper.API.Processors
             if (!instaUserListResponse.IsOk())
             {
                 var status = ErrorHandlingHelper.GetBadStatusFromJsonString(json);
-                Result.Fail(new ResultInfo(status.Message), (InstaUserListShortResponse) null);
+                Result.Fail(new ResultInfo(status.Message), (InstaUserListShortResponse)null);
             }
             return Result.Success(instaUserListResponse);
         }

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Models;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {
@@ -10,6 +10,7 @@ namespace InstaSharper.API.Processors
             GetMediaCommentsAsync(string mediaId, PaginationParameters paginationParameters);
 
         Task<IResult<InstaComment>> CommentMediaAsync(string mediaId, string text);
+
         Task<IResult<bool>> DeleteCommentAsync(string mediaId, string commentId);
     }
 }

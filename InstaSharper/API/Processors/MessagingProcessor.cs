@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Classes.Models;
 using InstaSharper.Classes.ResponseWrappers;
@@ -13,6 +7,12 @@ using InstaSharper.Converters.Json;
 using InstaSharper.Helpers;
 using InstaSharper.Logger;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {
@@ -84,7 +84,7 @@ namespace InstaSharper.API.Processors
             {
                 var directSendMessageUri = UriCreator.GetDirectSendMessageUri();
                 var request = HttpHelper.GetDefaultRequest(HttpMethod.Post, directSendMessageUri, _deviceInfo);
-                var fields = new Dictionary<string, string> {{"text", text}};
+                var fields = new Dictionary<string, string> { { "text", text } };
                 if (!string.IsNullOrEmpty(recipients))
                     fields.Add("recipient_users", "[[" + recipients + "]]");
                 else

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {

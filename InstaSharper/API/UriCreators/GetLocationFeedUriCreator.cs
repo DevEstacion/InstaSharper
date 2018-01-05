@@ -12,7 +12,7 @@ namespace InstaSharper.API.UriCreators
                 throw new Exception("Can't create URI for getting location feed");
             var query = string.Empty;
             if (!string.IsNullOrEmpty(nextId)) query += $"max_id={nextId}";
-            var uriBuilder = new UriBuilder(instaUri) {Query = query};
+            var uriBuilder = new UriBuilder(instaUri) { Query = query };
             return uriBuilder.Uri;
         }
     }

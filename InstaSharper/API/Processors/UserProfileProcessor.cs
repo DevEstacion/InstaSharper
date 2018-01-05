@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Classes.Models;
 using InstaSharper.Classes.ResponseWrappers;
@@ -13,6 +8,11 @@ using InstaSharper.Helpers;
 using InstaSharper.Logger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {
@@ -66,7 +66,7 @@ namespace InstaSharper.API.Processors
             catch (Exception exception)
             {
                 _logger?.LogException(exception);
-                return Result.Fail(exception.Message, (InstaUserShort) null);
+                return Result.Fail(exception.Message, (InstaUserShort)null);
             }
         }
 
@@ -106,7 +106,7 @@ namespace InstaSharper.API.Processors
             catch (Exception exception)
             {
                 _logger?.LogException(exception);
-                return Result.Fail(exception.Message, (InstaUserShort) null);
+                return Result.Fail(exception.Message, (InstaUserShort)null);
             }
         }
 

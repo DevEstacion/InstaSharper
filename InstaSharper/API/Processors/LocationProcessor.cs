@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using InstaSharper.API.UriCreators;
+﻿using InstaSharper.API.UriCreators;
 using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Classes.Models;
@@ -13,6 +7,12 @@ using InstaSharper.Converters;
 using InstaSharper.Helpers;
 using InstaSharper.Logger;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {

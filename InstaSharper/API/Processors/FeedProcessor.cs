@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Classes.Models;
 using InstaSharper.Classes.ResponseWrappers;
@@ -13,6 +7,12 @@ using InstaSharper.Converters.Json;
 using InstaSharper.Helpers;
 using InstaSharper.Logger;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using InstaRecentActivityConverter = InstaSharper.Converters.Json.InstaRecentActivityConverter;
 
 namespace InstaSharper.API.Processors
@@ -120,7 +120,7 @@ namespace InstaSharper.API.Processors
                 var request = HttpHelper.GetDefaultRequest(HttpMethod.Get, exploreUri, _deviceInfo);
                 var response = await _httpRequestProcessor.SendAsync(request);
                 var json = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != HttpStatusCode.OK) return Result.Fail("", (InstaExploreFeed) null);
+                if (response.StatusCode != HttpStatusCode.OK) return Result.Fail("", (InstaExploreFeed)null);
                 var feedResponse = JsonConvert.DeserializeObject<InstaExploreFeedResponse>(json,
                     new InstaExploreFeedDataConverter());
                 exploreFeed = ConvertersFabric.Instance.GetExploreFeedConverter(feedResponse).Convert();
@@ -257,7 +257,7 @@ namespace InstaSharper.API.Processors
             try
             {
                 var instaUri = UriCreator.GetTagFeedUri(tag);
-                instaUri = new UriBuilder(instaUri) {Query = $"max_id={nextId}"}.Uri;
+                instaUri = new UriBuilder(instaUri) { Query = $"max_id={nextId}" }.Uri;
                 var request = HttpHelper.GetDefaultRequest(HttpMethod.Get, instaUri, _deviceInfo);
                 var response = await _httpRequestProcessor.SendAsync(request);
                 var json = await response.Content.ReadAsStringAsync();
@@ -271,7 +271,7 @@ namespace InstaSharper.API.Processors
             }
             catch (Exception exception)
             {
-                return Result.Fail(exception.Message, (InstaMediaListResponse) null);
+                return Result.Fail(exception.Message, (InstaMediaListResponse)null);
             }
         }
 
@@ -283,14 +283,14 @@ namespace InstaSharper.API.Processors
                 var request = HttpHelper.GetDefaultRequest(HttpMethod.Get, exploreUri, _deviceInfo);
                 var response = await _httpRequestProcessor.SendAsync(request);
                 var json = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != HttpStatusCode.OK) return Result.Fail("", (InstaExploreFeedResponse) null);
+                if (response.StatusCode != HttpStatusCode.OK) return Result.Fail("", (InstaExploreFeedResponse)null);
                 return Result.Success(
                     JsonConvert.DeserializeObject<InstaExploreFeedResponse>(json, new InstaExploreFeedDataConverter()));
             }
             catch (Exception exception)
             {
                 _logger?.LogException(exception);
-                return Result.Fail(exception.Message, (InstaExploreFeedResponse) null);
+                return Result.Fail(exception.Message, (InstaExploreFeedResponse)null);
             }
         }
 
@@ -299,7 +299,7 @@ namespace InstaSharper.API.Processors
             if (!Uri.TryCreate(new Uri(InstaApiConstants.INSTAGRAM_URL), InstaApiConstants.TIMELINEFEED,
                 out var instaUri))
                 throw new Exception("Cant create search user URI");
-            var userUriBuilder = new UriBuilder(instaUri) {Query = $"max_id={maxId}"};
+            var userUriBuilder = new UriBuilder(instaUri) { Query = $"max_id={maxId}" };
             var request = HttpHelper.GetDefaultRequest(HttpMethod.Get, userUriBuilder.Uri, _deviceInfo);
             request.Properties.Add(new KeyValuePair<string, object>(InstaApiConstants.HEADER_PHONE_ID,
                 _httpRequestProcessor.RequestMessage.phone_id));

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Net.Http;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Logger;
+using System;
+using System.Net.Http;
 
 namespace InstaSharper.API.Builder
 {
@@ -34,7 +34,7 @@ namespace InstaSharper.API.Builder
             if (_user == null)
                 throw new ArgumentNullException("User auth data must be specified");
             if (_httpClient == null)
-                _httpClient = new HttpClient(_httpHandler) {BaseAddress = new Uri(InstaApiConstants.INSTAGRAM_URL)};
+                _httpClient = new HttpClient(_httpHandler) { BaseAddress = new Uri(InstaApiConstants.INSTAGRAM_URL) };
 
             if (_requestMessage == null)
             {
@@ -48,7 +48,6 @@ namespace InstaSharper.API.Builder
                     device_id = ApiRequestMessage.GenerateDeviceId()
                 };
             }
-
 
             if (string.IsNullOrEmpty(_requestMessage.password)) _requestMessage.password = _user?.Password;
             if (string.IsNullOrEmpty(_requestMessage.username)) _requestMessage.username = _user?.UserName;

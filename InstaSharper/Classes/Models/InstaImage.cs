@@ -13,6 +13,8 @@
         {
         }
 
+        public string UserTags { get; set; }
+
         public string URI { get; set; }
 
         public int Width { get; set; }

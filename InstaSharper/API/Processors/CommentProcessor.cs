@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Classes.Models;
 using InstaSharper.Classes.ResponseWrappers;
@@ -12,6 +7,11 @@ using InstaSharper.Converters.Json;
 using InstaSharper.Helpers;
 using InstaSharper.Logger;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {
@@ -104,7 +104,7 @@ namespace InstaSharper.API.Processors
             catch (Exception exception)
             {
                 _logger?.LogException(exception);
-                return Result.Fail(exception.Message, (InstaComment) null);
+                return Result.Fail(exception.Message, (InstaComment)null);
             }
         }
 
@@ -142,7 +142,7 @@ namespace InstaSharper.API.Processors
             var response = await _httpRequestProcessor.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             if (response.StatusCode != HttpStatusCode.OK)
-                return Result.Fail("Unable to get next portion of comments", (InstaCommentListResponse) null);
+                return Result.Fail("Unable to get next portion of comments", (InstaCommentListResponse)null);
             var comments = JsonConvert.DeserializeObject<InstaCommentListResponse>(json);
             return Result.Success(comments);
         }

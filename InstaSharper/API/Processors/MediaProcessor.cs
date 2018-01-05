@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using InstaSharper.Classes;
+﻿using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Classes.Models;
 using InstaSharper.Classes.ResponseWrappers;
@@ -15,6 +8,13 @@ using InstaSharper.Helpers;
 using InstaSharper.Logger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace InstaSharper.API.Processors
 {
@@ -206,7 +206,7 @@ namespace InstaSharper.API.Processors
                 var androidVersion =
                     AndroidVersion.FromString(_deviceInfo.FirmwareFingerprint.Split('/')[2].Split(':')[1]);
                 if (androidVersion == null)
-                    return Result.Fail("Unsupported android version", (InstaMedia) null);
+                    return Result.Fail("Unsupported android version", (InstaMedia)null);
                 var data = new JObject
                 {
                     {"_uuid", _deviceInfo.DeviceGuid.ToString()},
@@ -216,6 +216,7 @@ namespace InstaSharper.API.Processors
                     {"source_type", "4"},
                     {"caption", caption},
                     {"upload_id", uploadId},
+                    {"usertags", image.UserTags},
                     {
                         "device", new JObject
                         {

@@ -1,8 +1,8 @@
-using System;
-using System.Net.Http;
 using InstaSharper.Classes;
 using InstaSharper.Classes.Android.DeviceInfo;
 using InstaSharper.Logger;
+using System;
+using System.Net.Http;
 
 namespace InstaSharper.API.Builder
 {
@@ -34,7 +34,6 @@ namespace InstaSharper.API.Builder
         /// <param name="handler">HttpClientHandler</param>
         /// <returns>API Builder</returns>
         IInstaApiBuilder UseHttpClientHandler(HttpClientHandler handler);
-
 
         /// <summary>
         ///     Specify user login, password from here
