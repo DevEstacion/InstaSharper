@@ -59,11 +59,11 @@ namespace InstaSharper.API
         ///     Get Two Factor Authentication details
         /// </summary>
         /// <returns>
-        ///     An instance of TwoFactorInfo if success.
+        ///     An instance of TwoFactorLoginInfo if success.
         ///     A null reference if not success; in this case, do LoginAsync first and check if Two Factor Authentication is
         ///     required, if not, don't run this method
         /// </returns>
-        Task<IResult<TwoFactorInfo>> GetTwoFactorInfoAsync();
+        Task<IResult<TwoFactorLoginInfo>> GetTwoFactorInfoAsync();
 
         /// <summary>
         ///     Logout from instagram asynchronously
@@ -137,30 +137,32 @@ namespace InstaSharper.API
         ///     Get followers list by username asynchronously
         /// </summary>
         /// <param name="username">Username</param>
-        /// <param name="maxPages">Maximum count of pages to retrieve</param>
+        /// <param name="paginationParameters">Pagination parameters: next id and max amount of pages to load</param>
         /// <returns>
         ///     <see cref="InstaUserShortList" />
         /// </returns>
-        Task<IResult<InstaUserShortList>> GetUserFollowersAsync(string username, int maxPages = 0);
+        Task<IResult<InstaUserShortList>> GetUserFollowersAsync(string username,
+            PaginationParameters paginationParameters);
 
         /// <summary>
         ///     Get following list by username asynchronously
         /// </summary>
         /// <param name="username">Username</param>
-        /// <param name="maxPages">Maximum count of pages to retrieve</param>
+        /// <param name="paginationParameters">Pagination parameters: next id and max amount of pages to load</param>
         /// <returns>
         ///     <see cref="InstaUserShortList" />
         /// </returns>
-        Task<IResult<InstaUserShortList>> GetUserFollowingAsync(string username, int maxPages = 0);
+        Task<IResult<InstaUserShortList>> GetUserFollowingAsync(string username,
+            PaginationParameters paginationParameters);
 
         /// <summary>
         ///     Get followers list for currently logged in user asynchronously
         /// </summary>
-        /// <param name="maxPages">Maximum count of pages to retrieve</param>
+        /// <param name="paginationParameters">Pagination parameters: next id and max amount of pages to load</param>
         /// <returns>
         ///     <see cref="InstaUserShortList" />
         /// </returns>
-        Task<IResult<InstaUserShortList>> GetCurrentUserFollowersAsync(int maxPages = 0);
+        Task<IResult<InstaUserShortList>> GetCurrentUserFollowersAsync(PaginationParameters paginationParameters);
 
         /// <summary>
         ///     Get user tags by username asynchronously
@@ -274,8 +276,9 @@ namespace InstaSharper.API
         ///     Get media comments
         /// </summary>
         /// <param name="mediaId">Media id</param>
-        /// <param name="maxPages">Maximum amount of pages to load</param>
-        Task<IResult<InstaCommentList>> GetMediaCommentsAsync(string mediaId, int maxPages = 0);
+        /// <param name="paginationParameters">Pagination parameters: next id and max amount of pages to load</param>
+        Task<IResult<InstaCommentList>>
+            GetMediaCommentsAsync(string mediaId, PaginationParameters paginationParameters);
 
         /// <summary>
         ///     Get users (short) who liked certain media. Normaly it return around 1000 last users.
@@ -336,7 +339,7 @@ namespace InstaSharper.API
         /// <summary>
         ///     Configure photos for Album
         /// </summary>
-        /// <param name="uploadIds">Array of upload IDs to configure</param>
+        /// <param name="uploadId">Array of upload IDs to configure</param>
         /// ///
         /// <param name="caption">Caption</param>
         /// <returns></returns>
@@ -476,6 +479,23 @@ namespace InstaSharper.API
         /// <param name="mediaIds">Media id list.</param>
         /// <returns></returns>
         Task<IResult<InstaCollectionItem>> AddItemsToCollectionAsync(long collectionId, params string[] mediaIds);
+
+        /// <summary>
+        ///     Searches for specific location by provided geo-data or search query.
+        /// </summary>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="longitude">Longitude</param>
+        /// <param name="query">Search query</param>
+        /// <returns>List of locations (short format)</returns>
+        Task<IResult<InstaLocationShortList>> SearchLocation(double latitude, double longitude, string query);
+
+        /// <summary>
+        ///     Gets the feed of particular location.
+        /// </summary>
+        /// <param name="locationId">Location identifier</param>
+        /// <param name="paginationParameters">Pagination parameters: next id and max amount of pages to load</param>
+        /// <returns>Location feed</returns>
+        Task<IResult<InstaLocationFeed>> GetLocationFeed(long locationId, PaginationParameters paginationParameters);
 
         #endregion
     }

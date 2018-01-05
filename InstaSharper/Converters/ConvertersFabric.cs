@@ -228,5 +228,29 @@ namespace InstaSharper.Converters
         {
             return new InstaCoverMediaConverter {SourceObject = response};
         }
+
+        public IObjectConverter<InstaInboxMedia, InstaInboxMediaResponse> GetInboxMediaConverter(
+            InstaInboxMediaResponse response)
+        {
+            return new InstaInboxMediaConverter {SourceObject = response};
+        }
+
+        public IObjectConverter<InstaLocationShortList, InstaLocationSearchResponse> GetLocationsSearchConverter(
+            InstaLocationSearchResponse response)
+        {
+            return new InstaLocationSearchConverter {SourceObject = response};
+        }
+
+        public IObjectConverter<InstaLocationShort, InstaLocationShortResponse> GetLocationShortConverter(
+            InstaLocationShortResponse response)
+        {
+            return new InstaLocationShortConverter {SourceObject = response};
+        }
+
+        public IObjectConverter<InstaLocationFeed, InstaLocationFeedResponse> GetLocationFeedConverter(
+            InstaLocationFeedResponse response)
+        {
+            return new InstaLocationFeedConverter {SourceObject = response};
+        }
     }
 }
